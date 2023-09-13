@@ -12,7 +12,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "project name",
+      title: "TODO-Manager",
       template: "./src/template.html",
     }),
   ],

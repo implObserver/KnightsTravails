@@ -1,8 +1,17 @@
 export const Node = (cX, cY) => {
+  let node;
   const x = cX;
   const y = cY;
 
   let moves = [8];
+
+  const setNode = (nNode) => {
+    node = nNode;
+  }
+
+  const getNode = () => {
+    return node;
+  }
 
   const setMove = (node, index) => {
     moves[index] = node;
@@ -16,5 +25,5 @@ export const Node = (cX, cY) => {
     return [cX, cY];
   };
 
-  return { setMove, getMoves, getCoordinates };
+  return { setNode, getNode, setMove, getMoves, getCoordinates };
 };

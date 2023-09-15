@@ -2,8 +2,8 @@ export const knightMovesHandler = () => {
   let maxDeep = 4;
   let levelStart = -1;
   let levelEnd = 0;
-  let startPath = [];
-  let endPath = [];
+  let firstHalfPath = [];
+  let secondHalfPath = [];
   let levelStartPointChildrens = [];
   let levelEndPointChildrens = [];
 
@@ -11,10 +11,8 @@ export const knightMovesHandler = () => {
     if (start === end) {
       return [start];
     }
-
     fillingChildMoves([start], "start");
     fillingChildMoves([end], "end");
-
     const path = [...buildPath(start, end)];
     return path;
   };
@@ -41,10 +39,13 @@ export const knightMovesHandler = () => {
   };
 
   const buildPath = (start, end) => {
+    let path;
     let intersectPoint = getIntersectPoint();
-    buildEndPath(intersectPoint);
-    buildStartPath(intersectPoint);
-    const path = startPath.filter((n) => n).concat(endPath.filter((n) => n));
+    clearChilds();
+    buildFirstHalfPath(intersectPoint);
+    secondHalfPath.push(intersectPoint);
+    buildSecondHalfPath(intersectPoint);
+    path = firstHalfPath.filter((n) => n).concat(secondHalfPath.filter((n) => n));
     path.unshift(start);
     path.push(end);
     return new Set(path);
@@ -59,12 +60,10 @@ export const knightMovesHandler = () => {
         levelStartPointChildrens[levelEnd],
       );
     }
-    clearChilds();
-    endPath.push(intersectPoints[0]);
     return intersectPoints[0];
   };
 
-  const buildEndPath = (intersectPoint) => {
+  const buildSecondHalfPath = (intersectPoint) => {
     if (levelEndPointChildrens.length === 0) {
       return;
     } else {
@@ -72,12 +71,12 @@ export const knightMovesHandler = () => {
         intersectPoint.getMoves(),
         levelEndPointChildrens.pop(),
       );
-      endPath.push(intersectPoints[0]);
-      buildEndPath(intersectPoints[0]);
+      secondHalfPath.push(intersectPoints[0]);
+      buildSecondHalfPath(intersectPoints[0]);
     }
   };
 
-  const buildStartPath = (intersectPoint) => {
+  const buildFirstHalfPath = (intersectPoint) => {
     if (levelStartPointChildrens.length === 0) {
       return;
     } else {
@@ -85,8 +84,8 @@ export const knightMovesHandler = () => {
         intersectPoint.getMoves(),
         levelStartPointChildrens.pop(),
       );
-      startPath.push(intersectPoints[0]);
-      buildStartPath(intersectPoints[0]);
+      firstHalfPath.push(intersectPoints[0]);
+      buildFirstHalfPath(intersectPoints[0]);
     }
   };
 

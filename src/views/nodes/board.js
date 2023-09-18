@@ -12,9 +12,9 @@ export const fillBoard = (board) => {
             cell.setNode(node);
             boardNode.appendChild(node);
             if (isBlack) {
-                node.style.backgroundColor = 'black';
+                node.style.backgroundColor = '#d28b48';
             } else {
-                node.style.backgroundColor = '#fff0bf';
+                node.style.backgroundColor = '#ffce9f';
             }
             isBlack = !isBlack;
         }

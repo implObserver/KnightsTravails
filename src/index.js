@@ -3,8 +3,12 @@ import { Board } from "./models/board";
 import { knightMovesHandler } from "./models/knightMovesHandler";
 import { KnightMovesGraph } from "./models/knightMovesGraph";
 import { fillBoard } from './views/nodes/board';
+import { makeDraggable } from './views/animations/makeDraggable';
 
-
+const knightSvg = document.querySelector('.knight');
+const pointSvg = document.querySelector('.point');
+makeDraggable(knightSvg);
+makeDraggable(pointSvg);
 let board = Board();
 board.createCells();
 let cells = board.getCells();

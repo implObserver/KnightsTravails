@@ -22,7 +22,7 @@ export const Node = (cX, cY) => {
   };
 
   const getCoordinates = () => {
-    return [cX, cY];
+    return [x, y];
   };
 
   return { setNode, getNode, setMove, getMoves, getCoordinates };

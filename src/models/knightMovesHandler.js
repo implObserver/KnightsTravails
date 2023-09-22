@@ -1,7 +1,8 @@
+import { removeListenersCells, setListenerForPathCells, setListenersForActiveCells } from "../controllers/listeners/forCells";
+import { FiguresPositions } from "./figuresPositions";
+import { Path } from "./path";
+
 export const knightMovesHandler = () => {
-  let maxDeep = 4;
-  let levelStart = -1;
-  let levelEnd = 0;
   let firstHalfPath = [];
   let secondHalfPath = [];
   let levelStartPointChildrens = [];
@@ -11,83 +12,89 @@ export const knightMovesHandler = () => {
     if (start === end) {
       return [start];
     }
-    fillingChildMoves([start], "start");
-    fillingChildMoves([end], "end");
-    const path = [...buildPath(start, end)];
+
+    levelStartPointChildrens.push([start]);
+    levelEndPointChildrens.push([end]);
+
+    const path = bondingPath(start, end);
     return path;
   };
 
-  const fillingChildMoves = (point, flag) => {
-    for (let i = 0; i < maxDeep; i++) {
-      point = setChildrens(point, flag);
-    }
+  const bondingPath = (start, end) => {
+    let path;
+    let intersectPoint = findIntersect([start], [end]);
+
+    buildPath(intersectPoint, levelStartPointChildrens, firstHalfPath);
+    buildPath(intersectPoint, levelEndPointChildrens, secondHalfPath);
+
+    firstHalfPath = getProcessedArr(firstHalfPath);
+    secondHalfPath = getProcessedArr(secondHalfPath);
+
+    path = firstHalfPath.concat([intersectPoint]).concat(secondHalfPath);
+    return path;
   };
 
-  const setChildrens = (pointChildrens, flag = "start") => {
+  const findIntersect = (start, end, flag = 'def') => {
+    let intersect;
+
+    if (flag !== 'def') {
+      let points = flag === 'start' ? start : end;
+      setChildrens(points, flag);
+    } else {
+      flag = 'end';
+    }
+
+    const startLast = levelStartPointChildrens.length - 1;
+    const endLast = levelEndPointChildrens.length - 1;
+    const startLvlPoints = levelStartPointChildrens[startLast];
+    const endLvlPoints = levelEndPointChildrens[endLast];
+
+    const intersectPoints = checkChildrens(
+      startLvlPoints,
+      endLvlPoints,
+    );
+
+    if (intersectPoints.length <= 0) {
+      flag === 'start' ? flag = 'end' : flag = 'start';
+      intersect = findIntersect(startLvlPoints, endLvlPoints, flag);
+    } else {
+      intersect = intersectPoints[0];
+    }
+
+    return intersect;
+  }
+
+  const setChildrens = (pointChildrens, flag) => {
     let childrens = [];
     pointChildrens.forEach((child) => {
       if (child !== null && child !== undefined) {
-        childrens = childrens.concat(child.getMoves());
+        childrens = getProcessedArr(childrens.concat(child.getMoves()));
       }
     });
-    childrens = new Set(childrens.filter((n) => n));
-    childrens = [...childrens];
     flag === "start"
       ? levelStartPointChildrens.push(childrens)
       : levelEndPointChildrens.push(childrens);
-    return childrens;
   };
 
-  const buildPath = (start, end) => {
-    let path;
-    let intersectPoint = getIntersectPoint();
-    clearChilds();
-    buildFirstHalfPath(intersectPoint);
-    secondHalfPath.push(intersectPoint);
-    buildSecondHalfPath(intersectPoint);
-    path = firstHalfPath.filter((n) => n).concat(secondHalfPath.filter((n) => n));
-    path.unshift(start);
-    path.push(end);
-    return new Set(path);
-  };
+  const buildPath = (intersectPoint, childrens, container) => {
+    let moves = getProcessedArr(intersectPoint.getMoves());
+    let lvl = childrens.pop();
 
-  const getIntersectPoint = () => {
-    let intersectPoints = [];
-    while (intersectPoints.length === 0) {
-      levelStart < levelEnd ? ++levelStart : ++levelEnd;
-      intersectPoints = checkChildrens(
-        levelEndPointChildrens[levelStart],
-        levelStartPointChildrens[levelEnd],
-      );
+    if (lvl.indexOf(intersectPoint) >= 0) {
+      lvl = childrens.pop();
     }
-    return intersectPoints[0];
-  };
 
-  const buildSecondHalfPath = (intersectPoint) => {
-    if (levelEndPointChildrens.length === 0) {
+    if (childrens.length === 0) {
       return;
     } else {
       let intersectPoints = checkChildrens(
-        intersectPoint.getMoves(),
-        levelEndPointChildrens.pop(),
+        moves,
+        lvl,
       );
-      secondHalfPath.push(intersectPoints[0]);
-      buildSecondHalfPath(intersectPoints[0]);
+      container.push(intersectPoints[0]);
+      buildPath(intersectPoints[0], childrens, container);
     }
-  };
-
-  const buildFirstHalfPath = (intersectPoint) => {
-    if (levelStartPointChildrens.length === 0) {
-      return;
-    } else {
-      let intersectPoints = checkChildrens(
-        intersectPoint.getMoves(),
-        levelStartPointChildrens.pop(),
-      );
-      firstHalfPath.push(intersectPoints[0]);
-      buildFirstHalfPath(intersectPoints[0]);
-    }
-  };
+  }
 
   const checkChildrens = (startChildrens, endChildrens) => {
     const common = startChildrens.filter(
@@ -96,18 +103,19 @@ export const knightMovesHandler = () => {
     return common;
   };
 
-  const clearChilds = () => {
-    for (let i = 0; i < maxDeep - levelEnd; i++) {
-      if (levelEndPointChildrens.length > 1) {
-        levelEndPointChildrens.pop();
-      }
-    }
-    for (let i = 0; i < maxDeep - levelStart; i++) {
-      if (levelStartPointChildrens.length > 1) {
-        levelStartPointChildrens.pop();
-      }
-    }
-  };
-
   return { getPath };
 };
+
+export const start = () => {
+  let path = knightMovesHandler().getPath(FiguresPositions.knight, FiguresPositions.point);
+  Path.setPath(path);
+  path.forEach((element) => {
+    element.getNode().style.border = '1vh blue solid';
+    setListenerForPathCells(element.getNode());
+  });
+}
+
+const getProcessedArr = (array) => {
+  const set = new Set(array.filter((n) => n));
+  return [...set];
+}

@@ -1,5 +1,18 @@
 import { Node } from "./node";
 
+export const ActiveBoard = (() => {
+  let activeBoard;
+
+  const setBoard = (board) => {
+    activeBoard = board;
+  }
+  const getBoard = () => {
+    return activeBoard;
+  }
+
+  return { setBoard, getBoard };
+})()
+
 export const Board = () => {
   let width = 8;
   let height = 8;

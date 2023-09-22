@@ -1,3 +1,5 @@
+import { setListenersForCell } from "../../controllers/listeners/forCells";
+
 export const fillBoard = (board) => {
     const cells = board.getCells();
     const width = board.getSize()[0];
@@ -9,6 +11,7 @@ export const fillBoard = (board) => {
         for (let j = 0; j < height; j++) {
             const cell = cells[j][i];
             const node = getCellNode();
+            setListenersForCell(node);
             cell.setNode(node);
             boardNode.appendChild(node);
             if (isBlack) {

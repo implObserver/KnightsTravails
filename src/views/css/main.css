@@ -52,6 +52,10 @@ span {
     display: grid;
     justify-content: center;
     align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .panel {
@@ -61,7 +65,6 @@ span {
 }
 
 .svg {
-    cursor: move;
     display: grid;
     width: min(9vh, 5vw);
     height: min(9vh, 5vw);

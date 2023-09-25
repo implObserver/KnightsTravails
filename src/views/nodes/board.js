@@ -1,4 +1,5 @@
 import { setListenersForCell } from "../../controllers/listeners/forCells";
+import { getCellNode } from "./cell";
 
 export const fillBoard = (board) => {
     const cells = board.getCells();
@@ -22,10 +23,4 @@ export const fillBoard = (board) => {
             isBlack = !isBlack;
         }
     }
-}
-
-const getCellNode = () => {
-    const cell = document.createElement('div');
-    cell.classList.add('cell');
-    return cell;
 }

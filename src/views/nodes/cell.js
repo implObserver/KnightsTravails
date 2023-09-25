@@ -5,3 +5,9 @@ export const setBorder = (cell, color) => {
 export const resetBorder = (cell) => {
     cell.style.border = ``;
 }
+
+export const getCellNode = () => {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    return cell;
+}

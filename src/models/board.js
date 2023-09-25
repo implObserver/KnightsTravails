@@ -1,18 +1,5 @@
 import { Node } from "./node";
 
-export const ActiveBoard = (() => {
-  let activeBoard;
-
-  const setBoard = (board) => {
-    activeBoard = board;
-  }
-  const getBoard = () => {
-    return activeBoard;
-  }
-
-  return { setBoard, getBoard };
-})()
-
 export const Board = () => {
   let width = 8;
   let height = 8;
@@ -45,3 +32,16 @@ export const Board = () => {
 
   return { createCells, getCells, setSize, getSize };
 };
+
+export const ActiveBoard = (() => {
+  let activeBoard = Board();
+  activeBoard.createCells();
+  const setBoard = (board) => {
+    activeBoard = board;
+  }
+  const getBoard = () => {
+    return activeBoard;
+  }
+
+  return { setBoard, getBoard };
+})()

@@ -7,7 +7,6 @@ export const setListenersForDragSvg = (svg) => {
     const draggable = makeDraggable(svg);
     svg.addEventListener('mousedown', draggable.startDrag);
     svg.addEventListener('mousemove', draggable.drag);
-
     svg.addEventListener('mouseup', draggable.endDrag);
     svg.addEventListener('mouseup', e => {
         try {
@@ -22,7 +21,7 @@ export const setListenersForDragSvg = (svg) => {
         try {
             start();
         } catch {
-            
+
         }
     });
     svg.addEventListener('mouseover', draggable.endDrag);

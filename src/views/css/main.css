@@ -66,9 +66,6 @@ span {
 
 .svg {
     display: grid;
-    width: min(9vh, 5vw);
-    height: min(9vh, 5vw);
-    background: #00000000;
 }
 
 .knight,
@@ -77,10 +74,55 @@ span {
     height: min(8vh, 4vw);
 }
 
+.arrow-template {
+    display: none;
+}
+
+.arrow {
+    position: absolute;
+    pointer-events: none;
+    visibility: hidden;
+    width: min(6vh, 3vw);
+    height: min(6vh, 3vw);
+}
+
 path {
     pointer-events: none;
 }
 
+.knight-wrapper {
+    z-index: 1000;
+    background-color: white;
+    border-radius: 1vh;
+}
+
+.popup {
+    position: fixed;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    justify-items: center;
+    align-items: start;
+    opacity: 0;
+    visibility: hidden;
+    padding: 1vh;
+    transition: all 0.5s ease 0s;
+    z-index: 500;
+}
+
+.text-container {
+    display: flex;
+    align-items: center;
+    padding: 2vh;
+    height: 30%;
+    width: 60%;
+    opacity: 0;
+    visibility: hidden;
+    color: white;
+}
 
 @media screen and (max-aspect-ratio:1/1.0000001) {}
 

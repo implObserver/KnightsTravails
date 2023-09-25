@@ -98,7 +98,7 @@ const getXY = (myElement) => {
 
 }
 
-const setXY = (myElement, x, y) => {
+export const setXY = (myElement, x, y) => {
     const xforms = myElement.transform.baseVal;
     const firstXForm = xforms.getItem(0);
     firstXForm.setTranslate(firstXForm.matrix.e + x, firstXForm.matrix.f + y);

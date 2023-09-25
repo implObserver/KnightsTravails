@@ -7,17 +7,15 @@ import { makeDraggable } from './views/animations/makeDraggable';
 import { setListenersForDragSvg } from './controllers/listeners/forDragElements';
 import { FiguresPositions } from './models/figuresPositions';
 import { setListenersForTravails } from './controllers/listeners/forTravails';
+import { Animations } from './views/animations/animations';
+import { Arrow } from './views/animations/arrows';
+import { Knight } from './models/figures';
+import { startLern } from './models/lernPreset';
 
-let board = Board();
-board.createCells();
-ActiveBoard.setBoard(board);
-let cells = board.getCells();
-KnightMovesGraph().buildGraph(board);
+KnightMovesGraph().buildGraph(ActiveBoard.getBoard());
 
-fillBoard(board);
+fillBoard(ActiveBoard.getBoard());
 
-const knightSvg = document.querySelector('.knight');
-const pointSvg = document.querySelector('.point');
-setListenersForDragSvg(knightSvg);
-setListenersForDragSvg(pointSvg);
 setListenersForTravails();
+
+startLern();

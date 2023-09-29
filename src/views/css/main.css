@@ -27,7 +27,8 @@ span {
     display: grid;
     max-width: 100%;
     max-height: 100%;
-    gap: 1vh;
+    gap: 2vh;
+    padding: 5vh;
 }
 
 .board-wrapper {
@@ -35,7 +36,6 @@ span {
     justify-content: center;
     align-content: center;
     grid-template-rows: min-content min-content;
-    border: 1px red solid;
     gap: 1vh;
 }
 
@@ -43,8 +43,8 @@ span {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
-    width: min(90vh, 50vw);
-    height: min(90vh, 50vw);
+    width: min(80vh, 70vw);
+    height: min(80vh, 70vw);
     border: 1vh rgb(82, 82, 82) solid;
 }
 
@@ -60,6 +60,7 @@ span {
 
 .panel {
     display: grid;
+    gap: 2vh;
     grid-template-columns: 1fr 1fr;
     width: min(90vh, 50vw);
 }
@@ -84,16 +85,26 @@ span {
     visibility: hidden;
     width: min(6vh, 3vw);
     height: min(6vh, 3vw);
+    fill: rgb(27, 177, 247);
 }
 
 path {
     pointer-events: none;
 }
 
-.knight-wrapper {
-    z-index: 1000;
+.knight-wrapper,
+.point-wrapper {
+    display: grid;
+    grid-template-columns: min-content max-content;
     background-color: white;
     border-radius: 1vh;
+    padding: 1vh;
+}
+
+.drag-and-drop {
+    visibility: hidden;
+    color: rgb(27, 177, 247);
+    font-size: 1.5vh;
 }
 
 .popup {
@@ -116,12 +127,14 @@ path {
 .text-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 2vh;
     height: 30%;
     width: 60%;
     opacity: 0;
     visibility: hidden;
     color: white;
+    font-size: 2vh;
 }
 
 @media screen and (max-aspect-ratio:1/1.0000001) {}

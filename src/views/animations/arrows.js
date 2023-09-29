@@ -1,35 +1,15 @@
-import { getArrowNode } from "../nodes/arrow";
-import { Animations, SmoothAnimations } from "./animations";
-import { setXY } from "./makeDraggable";
+import { Animations } from "./animations";
 
-export const Arrow = (svg, name) => {
-    let interval;
-    const arrow = getArrowNode(name);
-    const rectSvg = svg.getBoundingClientRect();
+export const getMove = (arrow, rectParent, rectArrow) => {
+    Animations.transform.x(arrow, `${rectParent.x}px`, `${rectArrow.x}px`, 200);
+    Animations.transform.y(arrow, `${rectParent.y}px`, `${rectArrow.y}px`, 200).finished.then(() => {
+        Animations.transform.x(arrow, `${rectArrow.x}px`, `${rectParent.x}px`, 200);
+        Animations.transform.y(arrow, `${rectArrow.y}px`, `${rectParent.y}px`, 200)
+    })
+}
 
-    const startAnimation = () => {
-        setTimeout(() => {
-            SmoothAnimations.SmoothVisibility.open(arrow, 0, 1, 500, 'forwards');
-        }, 1000);
-        const rectArrow = arrow.getBoundingClientRect();
-        interval = setInterval(() => {
-            Animations.transform.x(arrow, `${rectArrow.x}px`, `${rectSvg.x + rectSvg.width / 2}px`, 400, 'forwards');
-            Animations.transform.y(arrow, `${rectArrow.y}px`, `${rectSvg.y}px`, 400, 'forwards').finished.then(() => {
-                Animations.transform.x(arrow, `${rectArrow.x}px`, `${rectSvg.x + rectSvg.width / 2}px`, 400, 'forwards').reverse();
-                Animations.transform.y(arrow, `${rectArrow.y}px`, `${rectSvg.y}px`, 400, 'forwards').reverse();
-            })
-        }, 790);
-    }
-
-    const stopAnimation = () => {
-        clearInterval(interval);
-    }
-
-    const viewArrow = () => {
-        const panel = document.querySelector(`.${name}-wrapper`);
-        panel.appendChild(arrow);
-        setXY(arrow, rectSvg.width / 4, -rectSvg.height)
-    }
-
-    return { viewArrow, startAnimation, stopAnimation }
-};
+export const setXY = (myElement, x, y) => {
+    const xforms = myElement.transform.baseVal;
+    const firstXForm = xforms.getItem(0);
+    firstXForm.setTranslate(x, y);
+}

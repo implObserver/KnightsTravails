@@ -1,5 +1,6 @@
 import { setListenersForActiveCells, setListenersForCell } from "../../controllers/listeners/forCells";
 import { ActiveBoard, Board } from "../../models/board";
+import { Knight, Point } from "../../models/figures";
 import { FiguresPositions } from "../../models/figuresPositions";
 import { start } from "../../models/knightMovesHandler";
 import { Path } from "../../models/path";
@@ -57,6 +58,7 @@ export function makeDraggable(svg) {
         if (last !== gag && last !== parent) {
             if (last.children.length === 0) {
                 last.appendChild(svg);
+                setParent(svg, last);
                 setListenersForActiveCells(last);
                 last.style.border = '1vh green solid';
                 parent.style.border = '';
@@ -104,8 +106,17 @@ export const setXY = (myElement, x, y) => {
     firstXForm.setTranslate(firstXForm.matrix.e + x, firstXForm.matrix.f + y);
 }
 
-const defaultXY = (myElement) => {
+export const defaultXY = (myElement) => {
     const xforms = myElement.transform.baseVal;
     const firstXForm = xforms.getItem(0);
     firstXForm.setTranslate(0, 0);
+}
+
+const setParent = (svg, parent) => {
+    if (svg.className.baseVal === 'knight') {
+        Knight.setParent(parent)
+    }
+    if (svg.className.baseVal === 'point') {
+        Point.setParent(parent);
+    }
 }

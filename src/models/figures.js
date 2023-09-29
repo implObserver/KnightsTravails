@@ -1,40 +1,97 @@
 import { setListenersForDragSvg } from "../controllers/listeners/forDragElements";
-import { Arrow } from "../views/animations/arrows";
+import { SmoothAnimations } from "../views/animations/animations";
+import { getMove, setXY } from "../views/animations/arrows";
+import { getArrowNode } from "../views/nodes/arrow";
+import { ActiveArrow } from "./currentAnimations";
 
-export const Knight = (() => {
-    const knightSvg = document.querySelector('.knight');
-    const knightArrow = Arrow(knightSvg, 'knight');
-
-    const setListeners = (() => {
-        setListenersForDragSvg(knightSvg);
-    })()
+export const Figure = (newSvg) => {
+    const svg = newSvg;
+    let parent;
 
     const getRect = () => {
-        return knightSvg.getBoundingClientRect();
+        return svg.getBoundingClientRect();
     }
+
+    const getSvg = () => {
+        return svg;
+    }
+
+    const setParent = (nParent) => {
+        parent = nParent;
+    }
+
+    const getParent = () => {
+        return parent;
+    }
+
+    return { getRect, getSvg, setParent, getParent }
+}
+
+export const Arrow = (parent, name) => {
+    const prototype = Figure(getArrowNode(name));
+    const arrow = prototype.getSvg();
+    let interval;
+
+    const view = () => {
+        const panel = document.querySelector(`.${name}-wrapper`);
+        panel.appendChild(arrow);
+
+        setTimeout(() => {
+            ActiveArrow.getAnimation().pause();
+            ActiveArrow.setAnimation(SmoothAnimations.SmoothVisibility.view(arrow, 0, 1, 500, 'forwards'));
+        }, 500);
+    }
+
+    const setPosition = () => {
+        let rectParent = parent.getRect();
+        setXY(arrow, rectParent.width, -rectParent.height)
+    }
+
+    const move = () => {
+        interval = setInterval(() => {
+            let rectParent = parent.getRect();
+            let rectArrow = prototype.getRect();
+            getMove(arrow, rectParent, rectArrow);
+        }, 800);
+    }
+
+    const hide = () => {
+        ActiveArrow.getAnimation().pause();
+        ActiveArrow.setAnimation(SmoothAnimations.SmoothVisibility.hide(arrow, 1, 0, 500, 'forwards'));
+    }
+
+    return Object.assign(prototype, { setPosition, view, hide, move });
+}
+
+export const Knight = (() => {
+    const prototype = Figure(document.querySelector('.knight'));
+    const arrow = Arrow(prototype, 'knight');
+
+    prototype.setParent(document.querySelector('.knight-wrapper'));
+
+    const setListeners = (() => {
+        setListenersForDragSvg(prototype.getSvg());
+    })()
 
     const getArrow = () => {
-        return knightArrow;
+        return arrow;
     }
 
-    return { getRect, getArrow }
+    return Object.assign(prototype, { getArrow });
 })();
 
 export const Point = (() => {
-    const pointSvg = document.querySelector('.point');
-    const pointArrow = Arrow(pointSvg, 'point');
+    const prototype = Figure(document.querySelector('.point'));
+    const arrow = Arrow(prototype, 'point');
+    prototype.setParent(document.querySelector('.point-wrapper'));
 
     const setListeners = (() => {
-        setListenersForDragSvg(pointSvg);
+        setListenersForDragSvg(prototype.getSvg());
     })()
 
-    const getRect = () => {
-        return pointSvg.getBoundingClientRect();
-    }
-
     const getArrow = () => {
-        return pointArrow;
+        return arrow;
     }
 
-    return { getRect, getArrow }
+    return Object.assign(prototype, { getArrow });
 })();

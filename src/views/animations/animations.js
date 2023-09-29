@@ -36,16 +36,18 @@ export const Animations = (() => {
 
 export const SmoothAnimations = (() => {
     const SmoothVisibility = (() => {
-        const close = (e, op1, op2, dur, fill) => {
-            return Animations.opacity(e, op1, op2, dur, fill).finished.then(() => {
+        const hide = (e, op1, op2, dur, fill) => {
+            setTimeout(() => {
                 e.style.visibility = 'hidden';
-            });
+            }, dur);
+
+            return Animations.opacity(e, op1, op2, dur, fill);
         }
-        const open = (e, op1, op2, dur, fill) => {
+        const view = (e, op1, op2, dur, fill) => {
             e.style.visibility = 'visible';
             return Animations.opacity(e, op1, op2, dur, fill);
         }
-        return { open, close };
+        return { view, hide };
     })();
     return { SmoothVisibility };
 })();

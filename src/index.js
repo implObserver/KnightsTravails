@@ -10,7 +10,8 @@ import { setListenersForTravails } from './controllers/listeners/forTravails';
 import { Animations } from './views/animations/animations';
 import { Arrow } from './views/animations/arrows';
 import { Knight } from './models/figures';
-import { startLern } from './models/lernPreset';
+import { currentDemo, startLern } from './models/lernPreset';
+import { setListenersForDemo } from './controllers/listeners/forLernDemo';
 
 KnightMovesGraph().buildGraph(ActiveBoard.getBoard());
 
@@ -18,4 +19,5 @@ fillBoard(ActiveBoard.getBoard());
 
 setListenersForTravails();
 
-startLern();
+let demo = startLern();
+currentDemo.setdemo(demo);

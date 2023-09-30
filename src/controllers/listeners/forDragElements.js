@@ -24,6 +24,27 @@ export const setListenersForDragSvg = (svg) => {
 
         }
     });
-    svg.addEventListener('mouseover', draggable.endDrag);
-    svg.addEventListener('mouseleave', draggable.endDrag);
+}
+
+export const setListenersForDragSvgForMibile = (svg) => {
+    const draggable = makeDraggable(svg);
+    svg.addEventListener('touchstart', draggable.startDrag);
+    svg.addEventListener('touchmove', draggable.drag);
+    svg.addEventListener('touchend', draggable.endDrag);
+    svg.addEventListener('touchend', e => {
+        try {
+            let path = Path.getPath();
+            path.forEach(cell => {
+                cell.getNode().style.border = '';
+                setListenersForCell(cell.getNode());
+            });
+        } catch (error) {
+
+        }
+        try {
+            start();
+        } catch {
+
+        }
+    });
 }

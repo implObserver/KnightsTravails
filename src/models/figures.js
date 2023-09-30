@@ -1,4 +1,4 @@
-import { setListenersForDragSvg } from "../controllers/listeners/forDragElements";
+import { setListenersForDragSvg, setListenersForDragSvgForMibile } from "../controllers/listeners/forDragElements";
 import { SmoothAnimations } from "../views/animations/animations";
 import { getMove, setXY } from "../views/animations/arrows";
 import { getArrowNode } from "../views/nodes/arrow";
@@ -71,6 +71,7 @@ export const Knight = (() => {
 
     const setListeners = (() => {
         setListenersForDragSvg(prototype.getSvg());
+        setListenersForDragSvgForMibile(prototype.getSvg());
     })()
 
     const getArrow = () => {
@@ -87,6 +88,7 @@ export const Point = (() => {
 
     const setListeners = (() => {
         setListenersForDragSvg(prototype.getSvg());
+        setListenersForDragSvgForMibile(prototype.getSvg());
     })()
 
     const getArrow = () => {

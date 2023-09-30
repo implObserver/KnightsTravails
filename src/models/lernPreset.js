@@ -1,4 +1,4 @@
-import { removeListenersForDemo, setListenersForDemo } from "../controllers/listeners/forLernDemo";
+import { removeListenersForDemo, removeListenersForDemoForMobile, setListenersForDemo, setListenersForDemoForMibile } from "../controllers/listeners/forLernDemo";
 import { Hide, View } from "../views/animations/presets";
 import { ActiveText } from "./currentAnimations";
 import { Elements } from "./elements";
@@ -25,6 +25,7 @@ export const startLern = () => {
 export const demoSteps = () => {
     const start = () => {
         setListenersForDemo();
+        setListenersForDemoForMibile();
         Knight.getSvg().style.pointerEvents = 'none';
         View.popup();
         setTimeout(() => {
@@ -52,6 +53,7 @@ export const demoSteps = () => {
 
     const end = () => {
         removeListenersForDemo();
+        removeListenersForDemoForMobile();
         Knight.getSvg().style.pointerEvents = 'all';
         Hide.popup();
     }

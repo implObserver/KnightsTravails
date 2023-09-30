@@ -17,3 +17,20 @@ export const setListenersForDemo = () => {
     Point.getSvg().addEventListener('mousedown', changeBoardPriority);
     Point.getSvg().addEventListener('mouseup', endDragDemo);
 }
+
+export const setListenersForDemoForMibile = () => {
+    window.addEventListener('click', demoSteps().step1, { once: true })
+    window.addEventListener('resize', defaultArrow);
+    Knight.getSvg().addEventListener('touchstart', changeBoardPriority);
+    Knight.getSvg().addEventListener('touchend', endDragDemo);
+    Point.getSvg().addEventListener('touchstart', changeBoardPriority);
+    Point.getSvg().addEventListener('touchend', endDragDemo);
+}
+
+export const removeListenersForDemoForMobile = () => {
+    window.removeEventListener('resize', defaultArrow);
+    Knight.getSvg().removeEventListener('touchstart', changeBoardPriority);
+    Knight.getSvg().removeEventListener('touchend', endDragDemo);
+    Point.getSvg().removeEventListener('touchstart', changeBoardPriority);
+    Point.getSvg().removeEventListener('touchend', endDragDemo);
+}

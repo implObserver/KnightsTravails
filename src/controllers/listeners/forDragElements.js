@@ -30,11 +30,15 @@ export const setListenersForDragSvg = (svg) => {
 export const setListenersForDragSvgForMibile = (svg) => {
     const draggable = makeDraggable(svg);
     svg.addEventListener('touchstart', draggable.startDrag);
-    svg.addEventListener('touchmove', draggable.drag);
-    svg.addEventListener('touchmove', e => {
-        Elements.board.style.border = '1vh red solid';
+    svg.addEventListener('touchstart', e => {
+        Elements.board.style.border = '1vh green solid';
     });
+    svg.addEventListener('touchmove', draggable.drag);
+
     svg.addEventListener('touchend', draggable.endDrag);
+    svg.addEventListener('touchend', e => {
+        Elements.board.style.border = '';
+    });
     svg.addEventListener('touchend', e => {
         try {
             let path = Path.getPath();

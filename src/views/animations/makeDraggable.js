@@ -28,9 +28,15 @@ export function makeDraggable(svg) {
     function drag(e) {
         if (selectedElement) {
             const rect = svg.getBoundingClientRect();
-            const cursorX = e.clientX;
-            const cursorY = e.clientY;
-            const elements = document.elementsFromPoint(cursorX, cursorY);
+            let cursorX = e.clientX;
+            let cursorY = e.clientY;
+
+            if (cursorX === undefined) {
+                cursorX = e.touches[0].clientX;
+                cursorY = e.touches[0].clientY;
+            }
+
+            let elements = document.elementsFromPoint(cursorX, cursorY);
             const element = elements[cellIndex];
             let svgX = rect.x + parseInt(rect.width / 2);
             let svgY = rect.y + parseInt(rect.height / 2);

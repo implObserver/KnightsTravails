@@ -68,7 +68,7 @@ const knightDemo = () => {
     Knight.getArrow().setPosition();
     Knight.getArrow().view();
     Knight.getArrow().move();
-    //ActiveText.setAnimation(View.knightText());
+    ActiveText.setAnimation(View.knightText());
 
     setTimeout(() => {
         Knight.getSvg().style.pointerEvents = 'all';
@@ -79,7 +79,7 @@ const pointDemo = () => {
     Point.getArrow().setPosition();
     Point.getArrow().view();
     Point.getArrow().move();
-    //ActiveText.setAnimation(View.pointText());
+    ActiveText.setAnimation(View.pointText());
 }
 
 export const defaultArrow = () => {
@@ -92,11 +92,11 @@ export const changeBoardPriority = (e) => {
     if (svgName === 'knight') {
         addBoardPriority(Knight);
         Knight.getArrow().hide();
-        //ActiveText.setAnimation(Hide.knightText());
+        ActiveText.setAnimation(Hide.knightText());
     }
     if (svgName === 'point') {
         Point.getArrow().hide();
-        //ActiveText.setAnimation(Hide.pointText());
+        ActiveText.setAnimation(Hide.pointText());
     }
 
 }

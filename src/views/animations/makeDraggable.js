@@ -87,19 +87,6 @@ export function makeDraggable(svg) {
     return { startDrag, drag, endDrag, last };
 }
 
-
-
-const getXY = (myElement) => {
-    const xforms = myElement.transform.baseVal;
-    const firstXForm = xforms.getItem(0);
-    if (firstXForm.type == SVGTransform.SVG_TRANSFORM_TRANSLATE) {
-        const firstX = firstXForm.matrix.e;
-        const firstY = firstXForm.matrix.f;
-        return [firstX, firstY];
-    }
-
-}
-
 export const setXY = (myElement, x, y) => {
     const xforms = myElement.transform.baseVal;
     const firstXForm = xforms.getItem(0);

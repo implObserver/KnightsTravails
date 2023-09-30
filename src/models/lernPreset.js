@@ -4,6 +4,10 @@ import { ActiveText } from "./currentAnimations";
 import { Elements } from "./elements";
 import { Knight, Point } from "./figures";
 
+let knightTextHide = Hide.knightText();
+let knightTextView = Hide.knightText();
+let pointTextAnimation;
+
 export const currentDemo = (() => {
     let demo;
 
@@ -34,7 +38,6 @@ export const demoSteps = () => {
     }
 
     const step1 = () => {
-        console.log('wwwda')
         Elements.knightWrapper.style.zIndex = '501';
         Hide.textContainer();
         View.knightWrapper();
@@ -65,7 +68,6 @@ const knightDemo = () => {
     Knight.getArrow().setPosition();
     Knight.getArrow().view();
     Knight.getArrow().move();
-    ActiveText.getAnimation().pause();
     ActiveText.setAnimation(View.knightText());
 
     setTimeout(() => {
@@ -77,7 +79,6 @@ const pointDemo = () => {
     Point.getArrow().setPosition();
     Point.getArrow().view();
     Point.getArrow().move();
-    ActiveText.getAnimation().pause();
     ActiveText.setAnimation(View.pointText());
 }
 
@@ -91,15 +92,13 @@ export const changeBoardPriority = (e) => {
     if (svgName === 'knight') {
         addBoardPriority(Knight);
         Knight.getArrow().hide();
-        console.log('aaa')
-        ActiveText.getAnimation().pause();
         ActiveText.setAnimation(Hide.knightText());
     }
     if (svgName === 'point') {
         Point.getArrow().hide();
-        ActiveText.getAnimation().pause();
         ActiveText.setAnimation(Hide.pointText());
     }
+
 }
 
 const addBoardPriority = async () => {
@@ -117,8 +116,6 @@ export const endDragDemo = (e) => {
     if (svgName === 'knight') {
         if (Knight.getParent().className === 'knight-wrapper') {
             Knight.getArrow().view();
-            console.log('ddd')
-            ActiveText.getAnimation().pause();
             ActiveText.setAnimation(View.knightText());
             removeBoardPriority(Knight);
         } else {
@@ -133,7 +130,7 @@ export const endDragDemo = (e) => {
             demoSteps().end();
         } else {
             Point.getArrow().view();
-            ActiveText.getAnimation().pause();
+            ActiveText.getAnimation();
             ActiveText.setAnimation(View.pointText());
         }
     }

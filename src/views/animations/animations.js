@@ -38,10 +38,12 @@ export const SmoothAnimations = (() => {
     const SmoothVisibility = (() => {
         const hide = (e, op1, op2, dur, fill) => {
             setTimeout(() => {
-                e.style.visibility = 'hidden';
+                if (opacity.playState !== 'paused') {
+                    e.style.visibility = 'hidden';
+                }
             }, dur);
-
-            return Animations.opacity(e, op1, op2, dur, fill);
+            let opacity = Animations.opacity(e, op1, op2, dur, fill);
+            return opacity;
         }
         const view = (e, op1, op2, dur, fill) => {
             e.style.visibility = 'visible';

@@ -5,6 +5,7 @@ const AnimatingObject = () => {
     let animation = SmoothAnimations.SmoothVisibility.view(Elements.board, 1, 1, 1, 'forwards');
 
     const setAnimation = (newAnimation) => {
+        animation.pause();
         animation = newAnimation;
     }
 

@@ -37,7 +37,6 @@ export const Arrow = (parent, name) => {
         panel.appendChild(arrow);
 
         setTimeout(() => {
-            ActiveArrow.getAnimation().pause();
             ActiveArrow.setAnimation(SmoothAnimations.SmoothVisibility.view(arrow, 0, 1, 500, 'forwards'));
         }, 500);
     }
@@ -56,7 +55,6 @@ export const Arrow = (parent, name) => {
     }
 
     const hide = () => {
-        ActiveArrow.getAnimation().pause();
         ActiveArrow.setAnimation(SmoothAnimations.SmoothVisibility.hide(arrow, 1, 0, 500, 'forwards'));
     }
 

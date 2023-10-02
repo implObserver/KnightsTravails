@@ -52,6 +52,7 @@ export const setListenersForDragSvgForMibile = (svg) => {
     svg.addEventListener('touchmove', draggable.drag);
     svg.addEventListener('touchend', draggable.endDrag);
     svg.addEventListener('touchstart', e => {
+        e.preventDefault()
         try {
             let path = Path.getPath();
             path.forEach(cell => {

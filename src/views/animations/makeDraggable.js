@@ -63,6 +63,7 @@ export function makeDraggable(svg) {
         if (last !== gag && last !== parent) {
             if (last.children.length === 0) {
                 last.appendChild(svg);
+
                 setParent(svg, last);
                 setListenersForActiveCells(last);
                 setBorder(last, 'green');
@@ -70,16 +71,15 @@ export function makeDraggable(svg) {
                 if (parent.className === 'cell') {
                     setListenersForCell(parent);
                 }
-                let coordinates;
+             
                 cells.forEach(cells => {
                     cells.forEach(cell => {
                         if (cell.getNode() === last) {
-                            coordinates = cell;
+                            FiguresPositions[svg.className.baseVal] = cell;
                         }
                     });
                 });
 
-                FiguresPositions[svg.className.baseVal] = coordinates;
             }
         }
     }

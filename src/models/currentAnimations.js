@@ -25,3 +25,8 @@ export const ActiveText = (() => {
     const prototype = AnimatingObject();
     return prototype;
 })();
+
+export const ActiveFigure = (() => {
+    const prototype = AnimatingObject();
+    return prototype;
+})();

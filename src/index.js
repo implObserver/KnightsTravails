@@ -19,5 +19,9 @@ fillBoard(ActiveBoard.getBoard());
 
 setListenersForTravails();
 
-let demo = startLern();
-currentDemo.setdemo(demo);
+let isLern = JSON.parse(localStorage.getItem('isLern'));
+
+if (isLern !== 'yes') {
+    let demo = startLern();
+    currentDemo.setdemo(demo);
+}

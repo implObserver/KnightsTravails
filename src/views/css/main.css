@@ -25,6 +25,7 @@ span {
 
 .wrapper {
     display: grid;
+    grid-template-rows: min-content min-content;
     justify-content: center;
     align-content: center;
     max-width: 100%;
@@ -53,6 +54,8 @@ span {
 .cell {
     display: grid;
     justify-content: center;
+    justify-items: center;
+    align-content: center;
     align-items: center;
     user-select: none;
     -webkit-user-select: none;
@@ -60,13 +63,19 @@ span {
     -ms-user-select: none;
 }
 
+.number {
+    font-size: min(5vh, 5vw);
+}
+
 .panel {
     display: grid;
     gap: 2vh;
     grid-template-columns: 1fr 1fr;
-    width: min(80vh, 70vw);
+    width: min(85vh, 80vw);
     justify-items: center;
     align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .svg {
@@ -76,6 +85,7 @@ span {
 .knight,
 .point {
     display: grid;
+    position: absolute;
     width: min(8vh, 8vw);
     height: min(8vh, 8vw);
 }

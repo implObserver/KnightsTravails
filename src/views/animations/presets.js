@@ -77,5 +77,9 @@ export const Hide = (() => {
         return SmoothAnimations.SmoothVisibility.hide(Elements.pointText, 1, 0, 500, 'forwards');
     }
 
-    return { popup, board, textContainer, knightArrow, pointArrow, knightWrapper, pointWrapper, knightText, pointText };
+    const plug = () => {
+        return SmoothAnimations.SmoothVisibility.hide(document.createElement('plug'), 1, 0, 500, 'forwards');
+    }
+
+    return { plug, popup, board, textContainer, knightArrow, pointArrow, knightWrapper, pointWrapper, knightText, pointText };
 })();

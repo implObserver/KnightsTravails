@@ -56,8 +56,8 @@ export const demoSteps = () => {
         removeListenersForDemoForMobile();
         Elements.knightWrapper.removeChild(Knight.getArrow().getSvg());
         Elements.pointWrapper.removeChild(Point.getArrow().getSvg());
-        Knight.getSvg().style.pointerEvents = 'all';
         Hide.popup();
+        localStorage.setItem('isLern', JSON.stringify('yes'));
     }
 
     return { start, step1, step2, end }

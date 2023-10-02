@@ -7,6 +7,7 @@ import { ActiveArrow } from "./currentAnimations";
 export const Figure = (newSvg) => {
     const svg = newSvg;
     let parent;
+    let cell;
 
     const getRect = () => {
         return svg.getBoundingClientRect();
@@ -24,7 +25,15 @@ export const Figure = (newSvg) => {
         return parent;
     }
 
-    return { getRect, getSvg, setParent, getParent }
+    const getCell = () => {
+        return cell;
+    }
+
+    const setCell = (nCell) => {
+        cell = nCell;
+    }
+
+    return { getCell, setCell, getRect, getSvg, setParent, getParent }
 }
 
 export const Arrow = (parent, name) => {
@@ -83,7 +92,7 @@ export const Knight = (() => {
 export const Point = (() => {
     const prototype = Figure(document.querySelector('.point'));
     const arrow = Arrow(prototype, 'point');
-    
+
     prototype.setParent(document.querySelector('.point-wrapper'));
 
     const setListeners = (() => {

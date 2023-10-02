@@ -1,4 +1,5 @@
 import { setListenerForPathCells } from "../controllers/listeners/forCells";
+import { viewPath } from "../views/animations/path";
 import { setBorder } from "../views/nodes/cell";
 import { FiguresPositions } from "./figuresPositions";
 import { Path } from "./path";
@@ -10,6 +11,7 @@ export const knightMovesHandler = () => {
   let levelEndPointChildrens = [];
 
   const getPath = (start, end) => {
+    console.log(start)
     if (start === end) {
       return [start];
     }
@@ -31,7 +33,7 @@ export const knightMovesHandler = () => {
     firstHalfPath = getProcessedArr(firstHalfPath);
     secondHalfPath = getProcessedArr(secondHalfPath);
 
-    path = firstHalfPath.concat([intersectPoint]).concat(secondHalfPath);
+    path = firstHalfPath.reverse().concat([intersectPoint]).concat(secondHalfPath);
     return path;
   };
 
@@ -110,10 +112,7 @@ export const knightMovesHandler = () => {
 export const start = () => {
   let path = knightMovesHandler().getPath(FiguresPositions.knight, FiguresPositions.point);
   Path.setPath(path);
-  path.forEach((element) => {
-    setBorder(element.getNode(), 'blue');
-    setListenerForPathCells(element.getNode());
-  });
+  viewPath();
 }
 
 const getProcessedArr = (array) => {

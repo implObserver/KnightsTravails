@@ -1,4 +1,5 @@
 import { setListenerForPathCells } from "../controllers/listeners/forCells";
+import { setBorder } from "../views/nodes/cell";
 import { FiguresPositions } from "./figuresPositions";
 import { Path } from "./path";
 
@@ -110,7 +111,7 @@ export const start = () => {
   let path = knightMovesHandler().getPath(FiguresPositions.knight, FiguresPositions.point);
   Path.setPath(path);
   path.forEach((element) => {
-    element.getNode().style.border = '1vh blue solid';
+    setBorder(element.getNode(), 'blue');
     setListenerForPathCells(element.getNode());
   });
 }

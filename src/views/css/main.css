@@ -45,9 +45,9 @@ span {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
-    width: min(80vh, 70vw);
-    height: min(80vh, 70vw);
-    border: 1vh rgb(82, 82, 82) solid;
+    width: min(85vh, 80vw);
+    height: min(85vh, 80vw);
+    border: min(1vh, 1vw) rgb(82, 82, 82) solid;
 }
 
 .cell {
@@ -76,8 +76,8 @@ span {
 .knight,
 .point {
     display: grid;
-    width: min(8vh, 4vw);
-    height: min(8vh, 4vw);
+    width: min(8vh, 8vw);
+    height: min(8vh, 8vw);
 }
 
 .arrow-template {

@@ -14,11 +14,11 @@ export const startMove = (path) => {
                 resetKnight();
                 Knight.getSvg().style.pointerEvents = 'all';
                 Point.getSvg().style.pointerEvents = 'all';
-            }, 800);
+            }, 1600);
         } else {
             moveX(path.shift());
         }
-    }, 1600);
+    }, 800);
 }
 
 export const resetKnight = () => {

@@ -1,4 +1,3 @@
-import { Elements } from "../../models/elements";
 import { start } from "../../models/knightMovesHandler";
 import { Path } from "../../models/path";
 import { makeDraggable } from "../../views/animations/makeDraggable";
@@ -30,15 +29,8 @@ export const setListenersForDragSvg = (svg) => {
 export const setListenersForDragSvgForMibile = (svg) => {
     const draggable = makeDraggable(svg);
     svg.addEventListener('touchstart', draggable.startDrag);
-    svg.addEventListener('touchstart', e => {
-        Elements.board.style.border = '1vh green solid';
-    });
     svg.addEventListener('touchmove', draggable.drag);
-
     svg.addEventListener('touchend', draggable.endDrag);
-    svg.addEventListener('touchend', e => {
-        Elements.board.style.border = '';
-    });
     svg.addEventListener('touchend', e => {
         try {
             let path = Path.getPath();

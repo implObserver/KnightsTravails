@@ -1,4 +1,5 @@
 export const Animations = (() => {
+
     const transform = (() => {
         const x = (e, x0, x1, dur, fill = 'none') => {
             return e.animate([{ left: `${x0}` }, { left: `${x1}` }], { duration: dur, fill: fill });
@@ -35,7 +36,9 @@ export const Animations = (() => {
 })();
 
 export const SmoothAnimations = (() => {
+
     const SmoothVisibility = (() => {
+
         const hide = (e, op1, op2, dur, fill) => {
             setTimeout(() => {
                 if (opacity.playState !== 'paused') {
@@ -45,11 +48,14 @@ export const SmoothAnimations = (() => {
             let opacity = Animations.opacity(e, op1, op2, dur, fill);
             return opacity;
         }
+
         const view = (e, op1, op2, dur, fill) => {
             e.style.visibility = 'visible';
             return Animations.opacity(e, op1, op2, dur, fill);
         }
+        
         return { view, hide };
     })();
+
     return { SmoothVisibility };
 })();

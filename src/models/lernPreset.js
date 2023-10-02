@@ -4,10 +4,6 @@ import { ActiveText } from "./currentAnimations";
 import { Elements } from "./elements";
 import { Knight, Point } from "./figures";
 
-let knightTextHide = Hide.knightText();
-let knightTextView = Hide.knightText();
-let pointTextAnimation;
-
 export const currentDemo = (() => {
     let demo;
 
@@ -31,6 +27,7 @@ export const demoSteps = () => {
         setListenersForDemo();
         setListenersForDemoForMibile();
         Knight.getSvg().style.pointerEvents = 'none';
+        Point.getSvg().style.pointerEvents = 'none';
         View.popup();
         setTimeout(() => {
             View.textContainer();
@@ -57,6 +54,8 @@ export const demoSteps = () => {
     const end = () => {
         removeListenersForDemo();
         removeListenersForDemoForMobile();
+        Elements.knightWrapper.removeChild(Knight.getArrow().getSvg());
+        Elements.pointWrapper.removeChild(Point.getArrow().getSvg());
         Knight.getSvg().style.pointerEvents = 'all';
         Hide.popup();
     }
@@ -65,6 +64,7 @@ export const demoSteps = () => {
 }
 
 const knightDemo = () => {
+    Knight.getArrow().getSvg().style.zIndex = 600;
     Knight.getArrow().setPosition();
     Knight.getArrow().view();
     Knight.getArrow().move();
@@ -80,11 +80,9 @@ const pointDemo = () => {
     Point.getArrow().view();
     Point.getArrow().move();
     ActiveText.setAnimation(View.pointText());
-}
-
-export const defaultArrow = () => {
-    Knight.getArrow().setPosition();
-    Point.getArrow().setPosition();
+    setTimeout(() => {
+        Point.getSvg().style.pointerEvents = 'all';
+    }, 1000);
 }
 
 export const changeBoardPriority = (e) => {

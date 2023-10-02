@@ -1,5 +1,3 @@
-import { Board } from "./board";
-
 export const KnightMovesGraph = () => {
   let nullNode;
 

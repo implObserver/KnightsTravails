@@ -1,5 +1,5 @@
 export const setBorder = (cell, color) => {
-    cell.style.border = `1vh ${color} solid`;
+    cell.style.border = `min(1vh, 1vw) ${color} solid`;
 }
 
 export const resetBorder = (cell) => {

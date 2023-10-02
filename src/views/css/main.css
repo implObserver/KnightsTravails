@@ -25,6 +25,8 @@ span {
 
 .wrapper {
     display: grid;
+    justify-content: center;
+    align-content: center;
     max-width: 100%;
     max-height: 100%;
     gap: 2vh;
@@ -62,7 +64,9 @@ span {
     display: grid;
     gap: 2vh;
     grid-template-columns: 1fr 1fr;
-    width: min(90vh, 50vw);
+    width: min(80vh, 70vw);
+    justify-items: center;
+    align-content: center;
 }
 
 .svg {
@@ -71,6 +75,7 @@ span {
 
 .knight,
 .point {
+    display: grid;
     width: min(8vh, 4vw);
     height: min(8vh, 4vw);
 }
@@ -83,6 +88,7 @@ span {
     position: absolute;
     pointer-events: none;
     visibility: hidden;
+    justify-self: start;
     width: min(6vh, 3vw);
     height: min(6vh, 3vw);
     fill: rgb(27, 177, 247);
@@ -99,12 +105,18 @@ path {
     background-color: white;
     border-radius: 1vh;
     padding: 1vh;
+    gap: min(2vh, 1vw);
+    width: min(30vh, 25vw);
+    height: min(10vh, 8vw);
+    justify-items: center;
+    align-content: center;
 }
 
 .drag-and-drop {
+    display: grid;
     visibility: hidden;
     color: rgb(27, 177, 247);
-    font-size: 1.5vh;
+    font-size: min(1.5vh, 1.2vw);
 }
 
 .popup {
@@ -116,7 +128,7 @@ path {
     top: 0;
     left: 0;
     justify-items: center;
-    align-items: start;
+    align-items: center;
     opacity: 0;
     visibility: hidden;
     padding: 1vh;

@@ -1,9 +1,8 @@
 import { setListenersForActiveCells, setListenersForCell } from "../../controllers/listeners/forCells";
-import { ActiveBoard, Board } from "../../models/board";
+import { ActiveBoard } from "../../models/board";
 import { Knight, Point } from "../../models/figures";
 import { FiguresPositions } from "../../models/figuresPositions";
-import { start } from "../../models/knightMovesHandler";
-import { Path } from "../../models/path";
+import { setBorder } from "../nodes/cell";
 
 export function makeDraggable(svg) {
     let selectedElement = false;
@@ -66,7 +65,7 @@ export function makeDraggable(svg) {
                 last.appendChild(svg);
                 setParent(svg, last);
                 setListenersForActiveCells(last);
-                last.style.border = '1vh green solid';
+                setBorder(last, 'green');
                 parent.style.border = '';
                 if (parent.className === 'cell') {
                     setListenersForCell(parent);

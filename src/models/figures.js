@@ -33,8 +33,8 @@ export const Arrow = (parent, name) => {
     let interval;
 
     const view = () => {
-        const panel = document.querySelector(`.${name}-wrapper`);
-        panel.appendChild(arrow);
+        const wrapper = document.querySelector(`.${name}-wrapper`);
+        wrapper.appendChild(arrow);
 
         setTimeout(() => {
             ActiveArrow.setAnimation(SmoothAnimations.SmoothVisibility.view(arrow, 0, 1, 500, 'forwards'));
@@ -43,13 +43,14 @@ export const Arrow = (parent, name) => {
 
     const setPosition = () => {
         let rectParent = parent.getRect();
-        setXY(arrow, rectParent.width, -rectParent.height)
+        setXY(arrow, rectParent);
     }
 
     const move = () => {
         interval = setInterval(() => {
-            let rectParent = parent.getRect();
             let rectArrow = prototype.getRect();
+            let rectParent = parent.getRect();
+            setXY(arrow, rectParent);
             getMove(arrow, rectParent, rectArrow);
         }, 800);
     }
@@ -82,6 +83,7 @@ export const Knight = (() => {
 export const Point = (() => {
     const prototype = Figure(document.querySelector('.point'));
     const arrow = Arrow(prototype, 'point');
+    
     prototype.setParent(document.querySelector('.point-wrapper'));
 
     const setListeners = (() => {

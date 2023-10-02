@@ -1,4 +1,4 @@
-import { removeListenersCells, setListenerForPathCells, setListenersForActiveCells } from "../controllers/listeners/forCells";
+import { setListenerForPathCells } from "../controllers/listeners/forCells";
 import { FiguresPositions } from "./figuresPositions";
 import { Path } from "./path";
 

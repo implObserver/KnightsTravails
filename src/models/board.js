@@ -36,12 +36,14 @@ export const Board = () => {
 export const ActiveBoard = (() => {
   let activeBoard = Board();
   activeBoard.createCells();
+
   const setBoard = (board) => {
     activeBoard = board;
   }
+
   const getBoard = () => {
     return activeBoard;
   }
-
+  
   return { setBoard, getBoard };
 })()

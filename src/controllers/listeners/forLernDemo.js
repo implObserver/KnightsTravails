@@ -21,7 +21,7 @@ export const setListenersForDemo = () => {
 }
 
 export const setListenersForDemoForMibile = () => {
-    window.addEventListener('click', demoSteps().step1, { once: true })
+    window.addEventListener('mousedown', demoSteps().step1, { once: true })
     window.addEventListener('resize', hideArrow());
     Knight.getSvg().addEventListener('touchstart', changeBoardPriority);
     Knight.getSvg().addEventListener('touchend', endDragDemo);

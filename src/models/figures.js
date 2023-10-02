@@ -47,7 +47,7 @@ export const Arrow = (parent, name) => {
 
         setTimeout(() => {
             ActiveArrow.setAnimation(SmoothAnimations.SmoothVisibility.view(arrow, 0, 1, 500, 'forwards'));
-        }, 500);
+        }, 1500);
     }
 
     const setPosition = () => {

@@ -111,7 +111,7 @@ path {
 .knight-wrapper,
 .point-wrapper {
     display: grid;
-    grid-template-columns: min-content max-content;
+    grid-template-columns: max-content max-content;
     background-color: white;
     border-radius: 1vh;
     padding: 1vh;
@@ -119,6 +119,8 @@ path {
     width: min(30vh, 25vw);
     height: min(10vh, 8vw);
     justify-items: center;
+    
+    align-items: center;
     align-content: center;
 }
 

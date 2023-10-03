@@ -1,7 +1,7 @@
 {
   "name": "knightstravails",
   "version": "1.0.0",
-  "description": "",
+  "description": "![image](https://github.com/implObserver/KnightsTravails/assets/70576666/4c783136-64be-4909-8593-6fe9f81c7fd1)",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -24,5 +24,6 @@
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
-  }
+  },
+  "main": "webpack.config.js"
 }

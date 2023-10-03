@@ -1,3 +1,4 @@
+import { Elements } from "../../models/elements";
 import { Knight, Point } from "../../models/figures";
 import { changeBoardPriority, currentDemo, demoSteps, endDragDemo } from "../../models/lernPreset";
 import { View } from "../../views/animations/presets";
@@ -12,7 +13,7 @@ export const removeListenersForDemo = () => {
 
 export const setListenersForDemo = () => {
     window.removeEventListener('resize', hideArrow());
-    window.addEventListener('click', demoSteps().step1, { once: true, passive: false })
+    Elements.popup.addEventListener('click', demoSteps().step1, { once: true, passive: false })
     Knight.getSvg().addEventListener('mousedown', changeBoardPriority);
     Knight.getSvg().addEventListener('mouseup', endDragDemo);
     Point.getSvg().addEventListener('mousedown', changeBoardPriority);
@@ -21,7 +22,7 @@ export const setListenersForDemo = () => {
 }
 
 export const setListenersForDemoForMibile = () => {
-    window.addEventListener('mousedown', demoSteps().step1, { once: true, passive: false });
+    Elements.popup.addEventListener('mousedown', demoSteps().step1, { once: true, passive: false });
     window.addEventListener('mousedown', e => {
         e.stopPropagation();
         e.preventDefault();

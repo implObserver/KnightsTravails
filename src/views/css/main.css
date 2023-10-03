@@ -25,7 +25,6 @@ span {
 
 .wrapper {
     display: grid;
-    cursor: pointer;
     grid-template-rows: min-content min-content;
     justify-content: center;
     align-content: center;

@@ -25,6 +25,7 @@ span {
 
 .wrapper {
     display: grid;
+    cursor: pointer;
     grid-template-rows: min-content min-content;
     justify-content: center;
     align-content: center;
@@ -84,6 +85,7 @@ span {
 
 .knight,
 .point {
+    
     display: grid;
     position: absolute;
     width: min(8vh, 8vw);
@@ -119,7 +121,7 @@ path {
     width: min(30vh, 25vw);
     height: min(10vh, 8vw);
     justify-items: center;
-    
+
     align-items: center;
     align-content: center;
 }

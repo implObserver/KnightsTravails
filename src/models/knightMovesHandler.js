@@ -11,7 +11,6 @@ export const knightMovesHandler = () => {
   let levelEndPointChildrens = [];
 
   const getPath = (start, end) => {
-    console.log(start)
     if (start === end) {
       return [start];
     }

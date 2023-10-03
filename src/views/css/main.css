@@ -85,7 +85,7 @@ span {
 
 .knight,
 .point {
-    
+    cursor: pointer;
     display: grid;
     position: absolute;
     width: min(8vh, 8vw);

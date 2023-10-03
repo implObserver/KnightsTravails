@@ -25,3 +25,5 @@ if (isLern !== 'yes') {
     let demo = startLern();
     currentDemo.setdemo(demo);
 }
+let demo = startLern();
+    currentDemo.setdemo(demo);
